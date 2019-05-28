@@ -51,5 +51,13 @@ class playGame extends Phaser.Scene{
         wall.setImmovable();
         return wall;
     }
-    
+    activateWall(){
+        if(this.theBall.body.speed == 0){
+            let ballVelocity = this.physics.velocityFromAngle(Phaser.Math.Between(220, 320), this.ballSpeed)
+            this.theBall.setVelocity(ballVelocity.x, ballVelocity.y);
+            this.lowerWall.alpha = 0.1;
+            this.lowerWall.body.checkCollision.none = true;
+            return;
+        }
+    }
 }
