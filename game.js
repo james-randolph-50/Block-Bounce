@@ -41,7 +41,10 @@ class playGame extends Phaser.Scene{
         this.theBall.body.setCircle(25)
         this.theBall.setBounce(1)
         this.createWall(32, game.config.height / 2, 32, game.config.height - 96);
-        this.createWall(game.config.width - 32, game.config.height / 2, )
+        this.createWall(game.config.width - 32, game.config.height / 2, 32, game.config.height - 96);
+        this.createWall(game.config.width / 2, 32, game.config.width - 32, 32);
+        this.lowerWall = this.createWall(game.config.width / 2, game.config.height - 32, game.config.width - 32, 32);
+        
     }
     createWall(posX, posY, width, height){
         let wall = this.physics.add.image(posX, posY, "wall");
@@ -85,5 +88,20 @@ class playGame extends Phaser.Scene{
                 }
             });
         }
+    }
+}
+
+function resize() {
+    var canvas = document.querySelector("canvas");
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var windowRaio = windowWidth / windowHeight;
+    var gameRatio = game.config.wdith / game.config.height;
+    if(windowRatio < gameRatio){
+        canvas.style.width = windowWidth + "px";
+        canvas.style.height = (windowWidth / gameRatio) + "px";
+    } else {
+        canvas.style.width = (windowHeight * gameRatio) + "px";
+        canvas.style.height = windowHeight + "px";
     }
 }
