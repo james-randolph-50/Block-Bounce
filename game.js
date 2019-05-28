@@ -59,5 +59,31 @@ class playGame extends Phaser.Scene{
             this.lowerWall.body.checkCollision.none = true;
             return;
         }
+        if(this.canActivateWall){
+            this.canActivateWall = false;
+            this.lowerWall.alpha = 1;
+            this.lowerWall.body.checkCollision.none = false;
+            let wallEvent = this.time.addEvent({
+                delay: gameOptions.wallDuration,
+                callbackScope: this,
+                callback: function(){
+                    this.lowerWall.alpha = 0.1;
+                    this.lowerWall.body.checkCollision.none = true;
+                }
+            });
+        }
+    }
+    update(){
+        if((this.theBall.y > game.config.height || this.theBall.y < 0) &AudioParamMap;&AudioParamMap; !this.gameOver){
+            this.gameOver = true;
+            this.cameras.main.shake(800, 0.05);
+            this.time.addEvent({
+                delay: 800,
+                callbackScope: this,
+                callback: function(){
+                    this.scene.start("PlayGame");
+                }
+            });
+        }
     }
 }
